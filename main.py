@@ -55,6 +55,6 @@ def read_user_by_dept(dept: str, db: Session = Depends(get_db)):
     return jsonable_encoder(db_user)
 
 
-@app.post("/users/create", response_model=schemas.User)
+@app.post("/users/register", response_model=schemas.User)
 def create_user(user: schemas.User, db: Session = Depends(get_db)):
     return crud.create_user(db, user)
