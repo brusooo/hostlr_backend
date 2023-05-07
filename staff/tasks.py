@@ -1,5 +1,6 @@
 """Contains tasks to be executed for methods."""
 
+from sqlalchemy import select
 import httpx
 
 from ...settings import Settings
@@ -13,7 +14,7 @@ async def send_notification(permission: Permission):
     # fetcch hod user id
     # select user_id from user_group_membership inner join keycloak_group on user_group_membership.group_id = keycloak_group.id where keycloak_group.name='Heads' and keycloak_group.parent_group in (select id from keycloak_group where keycloak_group.name='CSE')
 
-    user_id = ""
+    user_id = select([text('user_id')]).select_from(user_group_membership.join(keycloak_group, user_group_membership.c.group_id == keycloak_group.c.id)).where(and_(keycloak_group.c.name == text('Heads'), keycloak_group.c.parent_group))
     stmt = select(UserInfo).where(UserInfo.user_id == user_id)
     token = db.execute(stmt)
     notification = {
