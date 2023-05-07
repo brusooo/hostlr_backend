@@ -20,12 +20,30 @@ def get_all_users(db: Session):
 
 def create_user(db: Session, user: schemas.User):
     db_user = models.User(
-        id=user.id,
-        name=user.name,
-        department=user.department,
-        email=user.email,
-        mobileNumber=user.mobileNumber,
-        feePaid=user.feePaid,
+        
+        Sl_No=user.Sl_No,
+        Name=user.Name,
+        Course=user.Course,
+        Year_of_Study=user.Year_of_Study,
+        Register_Number=user.Register_Number,
+        Dept=user.Dept,
+        Branch=user.Branch,
+        DOB=user.DOB,
+        Blood_Group=user.Blood_Group,
+        Nationality=user.Nationality,
+        Community=user.Community,
+        Religion=user.Religion,
+        Father_Name=user.Father_Name,
+        Mother_Name=user.Mother_Name,
+        Gaurdian_Name=user.Gaurdian_Name,
+        Annual_Income_of_Parent=user.Annual_Income_of_Parent,
+        Mobile_no=user.Mobile_no,
+        Residential_Address=user.Residential_Address,
+        Communication_Address=user.Communication_Address,
+        Parent_Mobile_No=user.Parent_Mobile_No,
+        Room_No=user.Room_No,
+        Mess_Requirements=user.Mess_Requirements
+   
     )
     db.add(db_user)
     db.commit()
