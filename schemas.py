@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 class User(BaseModel):
-    Sl No :int
+    Sl_No :int
     Name : str
     Course:str
     Year_of_Study:int
