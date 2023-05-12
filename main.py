@@ -30,6 +30,9 @@ def get_db():
 def show_opening_page():
     return {"message": "continue"}
 
+@app.get("/testget")
+def show_opening_page():
+    return {"id": "1","name":"Rathish","Dept":"CSE"}
 
 @app.get("/users/all")
 def get_all_users(db: Session = Depends(get_db)):

@@ -2,7 +2,7 @@ from sqlalchemy import Column, Boolean, String ,BigInteger
 from sqlalchemy import Column, Text
 from sqlalchemy.dialects.postgresql import UUID
 
-from ..database import Base, engine
+from database import Base, engine
 
 
 from database import Base
