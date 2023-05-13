@@ -27,6 +27,16 @@ class UserInfo(Base):
 
     user_id = Column(UUID(as_uuid=True), primary_key=True)
     token = Column(Text)
+class SubmittedData(Base):
+    __tablename__ = 'form_data'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    from_ = Column(date)
+    to = Column(date)
+    reason = Colummn(String)
+    informed_Parennt_On = Column(date) 
+       
 
 
 Base.metadata.create_all(engine)

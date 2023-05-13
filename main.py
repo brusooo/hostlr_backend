@@ -61,3 +61,30 @@ def read_user_by_dept(dept: str, db: Session = Depends(get_db)):
 @app.post("/users/create", response_model=schemas.User)
 def create_user(user: schemas.User, db: Session = Depends(get_db)):
     return crud.create_user(db, user)
+
+@app.post('/api/submit')
+def submit_form(data: FormData):
+    # Create a new session
+    session = SessionLocal()
+
+    # Create a new instance of the SubmittedData model
+    submitted_data = SubmittedData(name=data.name, email=data.email)
+
+    # Add the new data to the session
+    session.add(submitted_data)
+    session.commit()
+
+    return {'message': 'Submitted successfully'}
+
+
+
+@app.patch("/updateuser/{id}")
+def update_user(request: RequestUser, db: Session = Depends(get_db)):
+    _user = crud.update_user(db, id=request.id,
+                             name=request.name, email=request.email, mobilenumber = request.mobilenumber, feepaid=request.feepaid)
+    return _user
+
+@app.patch("/deleteuser/{id}")
+def delete_user(request: RequestUser, db: Session = Depends(get_db)):
+    _user = crud.delete_user(db, id=request.id)
+    return _user
