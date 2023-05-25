@@ -42,6 +42,63 @@ def get_all_users(db: Session = Depends(get_db)):
         result_dict[f"{idx}"] = jsonable_encoder(user)
     return jsonable_encoder(result_dict)
 
+@app.get("/users/accepted")
+def get_all_accepted(db: Session = Depends(get_db)):
+    db_user = crud.get_all_accepted(db)
+    result_dict = {}
+    for idx, user in enumerate(db_user):
+        result_dict[f"{idx}"] = jsonable_encoder(user)
+    return jsonable_encoder(result_dict)
+
+@app.get("/users/acceptedhod")
+def get_all_acceptedhod(db: Session = Depends(get_db)):
+    db_user = crud.get_all_acceptedhod(db)
+    result_dict = {}
+    for idx, user in enumerate(db_user):
+        result_dict[f"{idx}"] = jsonable_encoder(user)
+    return jsonable_encoder(result_dict)
+
+@app.get("/users/acceptedhod1")
+def get_all_acceptedhod1(db: Session = Depends(get_db)):
+    db_user = crud.get_all_acceptedhod1(db)
+    result_dict = {}
+    for idx, user in enumerate(db_user):
+        result_dict[f"{idx}"] = jsonable_encoder(user)
+    return jsonable_encoder(result_dict)
+
+
+@app.get("/users/acceptedwadern")
+def get_all_acceptedwadern(db: Session = Depends(get_db)):
+    db_user = crud.get_all_acceptedwadern(db)
+    result_dict = {}
+    for idx, user in enumerate(db_user):
+        result_dict[f"{idx}"] = jsonable_encoder(user)
+    return jsonable_encoder(result_dict)
+
+
+@app.get("/getpermission/{stuid_}")
+def get_all_permission(stuid_:int, db: Session = Depends(get_db)):
+    _user = crud.get_all_permission(db, stuid_ = stuid_)
+    return _user
+
+
+@app.get("/users/deniedwadern")
+def get_all_deniedwadern(db: Session = Depends(get_db)):
+    db_user = crud.get_all_deniedwadern(db)
+    result_dict = {}
+    for idx, user in enumerate(db_user):
+        result_dict[f"{idx}"] = jsonable_encoder(user)
+    return jsonable_encoder(result_dict)
+
+
+@app.get("/users/deniedhod")
+def get_all_deniedhod(db: Session = Depends(get_db)):
+    db_user = crud.get_all_deniedhod(db)
+    result_dict = {}
+    for idx, user in enumerate(db_user):
+        result_dict[f"{idx}"] = jsonable_encoder(user)
+    return jsonable_encoder(result_dict)
+
 
 @app.get("/users/id/{user_id}", response_model=schemas.permission)
 def read_user_by_id(user_id: int, db: Session = Depends(get_db)):
@@ -95,8 +152,8 @@ def create_user(permission: schemas.permission, db: Session = Depends(get_db)):
 
 @app.post("/updateuser/{id_}")
 def update_user(id_:int,request: RequestUser, db: Session = Depends(get_db)):
-    _user = crud.update_user(db, id=id_,
-                             from_=request.from_,to_=request.to_, reason_=request.reason_,  informed_parent_on= request.informed_parent_on)
+    _user = crud.update_user(db, id=id_,stuid_ = request.stuid_,
+                             from_=request.from_,to_=request.to_,accepted_by=request.accepted_by, reason_=request.reason_,  informed_parent_on= request.informed_parent_on)
     return _user
 
 @app.patch("/deleteuser/{id}")
